@@ -2,49 +2,44 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DELETE ME. | Que internet se olvide de vos</title>
+<title>DELETE ME.</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--red:#FF2A2A;--black:#0A0A0A;--white:#F5F5F0;--gray:#1A1A1A}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--black);color:var(--white);font-family:'Space Mono',monospace}
-h1{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.85}
-.hero{background:var(--red);color:var(--black);padding:44px 20px 72px}
-.hero h1{font-size:clamp(72px,22vw,160px)}
-.hero p{margin-top:14px;font-weight:700;font-size:15px;max-width:380px}
-.wrap{padding:0 16px;max-width:600px;margin:0 auto}
-.form-box{background:var(--black);border:2.5px solid var(--red);border-radius:18px;padding:16px;margin-top:-36px;position:relative}
-.form-box input{width:100%;background:transparent;border:0;border-bottom:1px solid #222;color:#fff;font-family:'Space Mono';font-size:16px;padding:14px 2px;outline:0}
-.form-box button{width:100%;background:var(--red);border:0;color:#000;font-family:'Anton';font-size:20px;padding:14px;border-radius:10px;margin-top:16px}
-.sec{padding:52px 20px;max-width:700px;margin:auto}
-.card{background:#1A1A1A;border:1px solid #222;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px;font-weight:700}
-.legal{background:#F5F5F0;color:#0A0A0A;padding:32px 20px;margin-top:40px}
+:root{--red:#FF2A2A;--black:#0A0A0A}*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:#fff;font-family:'Space Mono'}
+h1{font-family:Anton;line-height:.85;font-size:clamp(70px,22vw,160px)}
+.hero{background:var(--red);color:#000;padding:42px 20px 70px}
+.wrap{max-width:540px;margin:auto;padding:0 16px}
+.box{background:#0A0A0A;border:2.5px solid var(--red);border-radius:18px;padding:16px;margin-top:-34px}
+.box input{width:100%;background:transparent;border:0;border-bottom:1px solid #222;color:#fff;padding:14px 2px;font-size:16px;outline:0}
+.box button{width:100%;background:var(--red);border:0;color:#000;font-family:Anton;font-size:20px;padding:14px;border-radius:10px;margin-top:16px}
+#ok{display:none;background:#00FF88;color:#000;padding:18px;border-radius:12px;margin-top:16px;font-weight:700;text-align:center}
 </style>
 </head>
 <body>
-<div class="hero"><div class="wrap"><h1>DELETE<br>ME.</h1><p>GOOGLEASTE TU DNI Y APARECIÓ TU DIRECCIÓN, TU CELU Y HASTA TU FAMILIA. LO BORRAMOS.</p></div></div>
-<div class="wrap">
-<form class="form-box" id="mainForm" action="https://api.web3forms.com/submit" method="POST">
+<div class="hero"><div class="wrap"><h1>DELETE<br>ME.</h1><p style="font-weight:700;margin-top:12px">¿GOOGLEASTE TU DNI Y SALIO TU DIRECCION? LO BORRAMOS.</p></div></div>
+<div class="wrap"><div class="box">
+<form id="mainForm">
 <input type="hidden" name="access_key" value="9adc1dbc-0224-48a5-bc8c-84f053985f06">
 <input type="hidden" name="subject" value="NUEVO LEAD DELETE ME">
 <input type="hidden" name="from_name" value="DELETE ME WEB">
-<input type="checkbox" name="botcheck" style="display:none">
-<input type="text" name="DNI" placeholder="Tu DNI >_ Ej: 41.123.456" required>
-<input type="email" name="Email" placeholder="Tu Gmail que usan para rastrearte >_" required>
-<input type="text" name="Telefono" placeholder="Tu celu que te llaman para estafar >_" required>
-<button type="submit" id="btn">RASTREAME AHORA →</button>
+<input type="text" name="DNI" id="dni" placeholder="DNI >_" required>
+<input type="email" name="Email" id="email" placeholder="Email >_" required>
+<input type="text" name="Telefono" id="tel" placeholder="Celu >_" required>
+<button id="btn" type="submit">RASTREAME Y BORRAME →</button>
 </form>
-</div>
-<div class="sec" id="result" style="display:none"><h2 style="font-family:Anton;font-size:26px">APARECES EN 5 SITIOS.</h2><div id="cards" style="margin-top:18px"></div>
-<div style="margin-top:26px;background:#111;border:1px dashed #333;border-radius:12px;padding:18px"><h4 style="font-family:Anton">>_ ¿CÓMO SABÉS QUE ESTÁ BORRADO?</h4><p style="font-size:12px;color:#aaa;line-height:1.6;margin-top:8px">1. Te mandamos captura de cada sitio con 0 resultados.<br>2. N° de reclamo en AAIP.<br>3. Si volvés a aparecer en 30 días, lo borramos gratis.</p></div></div>
-<div class="legal"><div class="wrap"><h2 style="font-family:Anton;font-size:28px">¿POR QUÉ TIENEN QUE BORRARTE?</h2><p style="margin-top:10px;font-size:13px;line-height:1.6"><b>1. No diste permiso.</b> Venden tus datos.<br><b>2. Ley 25.326 Art.16</b> Derecho a supresión en 5 días.<br><b>3. Nosotros reclamamos</b> por vos.</p></div></div>
+<div id="ok">✓ ENVIADO<br><span style="font-weight:400;font-size:12px">Se abrió WhatsApp. Revisá esberreta@gmail.com en SPAM también.</span></div>
+</div></div>
 <script>
-const sitios=["DATEAS.COM","NOSIS.COM.AR","BUSCADATOS.COM.AR","PAGINASBLANCAS.COM.AR","EQUIFAX/VERAZ"];
-const form=document.getElementById('mainForm'),result=document.getElementById('result'),cards=document.getElementById('cards'),btn=document.getElementById('btn');
-form.addEventListener('submit', async (e)=>{
- e.preventDefault(); btn.textContent='RASTREANDO...'; result.style.display='block'; result.scrollIntoView({behavior:'smooth'}); cards.innerHTML='';
- sitios.forEach((s,i)=>setTimeout(()=>{let d=document.createElement('div');d.className='card';d.innerHTML=`<span>${s}</span><span style=font-size:10px;background:#222;padding:4px 8px;border-radius:6px>ENCONTRADO</span>`;cards.appendChild(d);setTimeout(()=>{d.style.borderColor='#FF2A2A';d.innerHTML=`<span>${s}</span><span style=font-size:10px;background:#FF2A2A;color:#000;padding:4px 8px;border-radius:6px>EN PROCESO DE BORRADO</span>`},900)},i*500));
- const data=new FormData(form); await fetch('https://api.web3forms.com/submit',{method:'POST',body:data}); window.location.href='gracias.html';
+const form=document.getElementById('mainForm'),btn=document.getElementById('btn'),ok=document.getElementById('ok');
+const MI_WSP="5492216029871";
+form.addEventListener('submit',async(e)=>{
+ e.preventDefault(); btn.textContent="RASTREANDO...";
+ const dni=document.getElementById('dni').value, email=document.getElementById('email').value, telefono=document.getElementById('tel').value;
+ const data=new FormData(form); fetch('https://api.web3forms.com/submit',{method:'POST',body:data});
+ const texto=`🚨 NUEVO LEAD DELETE ME 🚨%0A*DNI:* ${dni}%0A*Email:* ${email}%0A*Celu cliente:* ${telefono}%0A%0AOrigen: web`;
+ ok.style.display='block'; btn.textContent="ABRIENDO WHATSAPP...";
+ setTimeout(()=>{ window.location.href=`https://wa.me/${MI_WSP}?text=${texto}`; btn.textContent="ENVIADO ✓"; },800);
 });
 </script>
 </body>
