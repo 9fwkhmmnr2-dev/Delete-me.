@@ -5,35 +5,35 @@
 <title>DELETE ME.</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap');
-:root{--red:#FF2A2A;--black:#0A0A0A;--white:#F5F5F0;--gray:#1A1A1A}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0A0A0A;color:#F5F5F0;font-family:'Space Mono',monospace}
-h1{font-family:'Anton',sans-serif;line-height:.85;font-size:clamp(80px,20vw,160px)}
-.hero{background:#FF2A2A;color:#0A0A0A;padding:48px 22px 70px}
-.hero p{margin-top:14px;font-weight:700;font-size:18px;line-height:1.1;max-width:400px}
-.input-area{margin-top:-32px;padding:0 16px}
-.box{background:#0A0A0A;border:2.5px solid #FF2A2A;border-radius:16px;padding:10px 10px 10px 18px;display:flex;gap:8px;max-width:600px}
-.box input{flex:1;background:transparent;border:0;color:#fff;font-family:'Space Mono';font-size:18px;outline:0;min-width:0}
-.box button{background:#FF2A2A;border:0;color:#000;font-family:'Anton';font-size:18px;padding:12px 18px;border-radius:10px;white-space:nowrap}
-.sec{padding:56px 18px;max-width:800px;margin:auto}
-.card{background:#1A1A1A;border:1px solid #2a2a2a;border-radius:12px;padding:16px;display:flex;justify-content:space-between;margin-bottom:10px}
-.card.ok{border-color:#FF2A2A;opacity:.6;text-decoration:line-through}
-.proof{background:#111;border:1px dashed #333;border-radius:12px;padding:18px;margin-top:24px}
+h1{font-family:Anton;line-height:.85;font-size:clamp(70px,18vw,140px)}
+.hero{background:#FF2A2A;color:#0A0A0A;padding:40px 20px 60px}
+.hero p{margin-top:12px;font-weight:700;max-width:400px}
+.box{background:#0A0A0A;border:2px solid #FF2A2A;border-radius:14px;padding:14px;max-width:500px;margin:-30px 16px 0;position:relative}
+.box input{width:100%;background:transparent;border:0;border-bottom:1px solid #222;color:#fff;font-family:'Space Mono';font-size:16px;padding:12px 0;outline:0}
+.box button{width:100%;background:#FF2A2A;border:0;color:#000;font-family:Anton;font-size:18px;padding:12px;border-radius:8px;margin-top:12px}
 </style>
 </head>
 <body>
-<div class="hero"><h1>DELETE<br>ME.</h1><p>INTERNET SABE DEMASIADO DE NOSOTROS.<br>VAMOS A HACER QUE SE OLVIDE.</p></div>
-<div class="input-area"><div class="box"><input id="dni" placeholder="Tu DNI >_" inputmode="numeric"><button onclick="go()">BORRAME</button></div><div id="log" style="color:#666;font-size:11px;margin-top:20px"></div></div>
-<div class="sec" id="res" style="display:none">
-<h2 style="font-family:Anton;font-size:28px">APARECES EN 5 SITIOS.</h2>
-<div id="cards"></div>
-<div id="proof" style="display:none" class="proof"><h4>>_ COMO SABES QUE ESTA BORRADO?</h4><p style="font-size:12px;color:#aaa;line-height:1.5">1. Te mandamos captura de cada sitio con 0 resultados.<br>2. Te damos N° de reclamo legal.<br>3. Si volves a aparecer en 30 dias, lo borramos gratis.</p><div style="margin-top:10px;background:#000;padding:10px;font-size:10px;color:#555">[COMPROBANTE] dateas.com -> 0 resultados (404)<br>[COMPROBANTE] nosis.com.ar -> DNI no encontrado</div></div>
-<div style="text-align:center;margin-top:30px"><button onclick="alert('Aca va tu WhatsApp')" style="background:#FF2A2A;border:0;color:#000;font-family:Anton;font-size:20px;padding:14px 32px;border-radius:10px;width:100%">QUIERO BORRARME</button></div>
+<div class="hero"><h1>DELETE<br>ME.</h1><p>¿GOOGLEASTE TU DNI Y SALIÓ TU DIRECCIÓN Y CELU?</p></div>
+
+<form action="https://formsubmit.co/esberreta@gmail.com" method="POST" class="box">
+<!-- config formsubmit -->
+<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME - BORRAR DNI">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="https://delete-me-one.vercel.app/gracias.html">
+
+<input type="text" name="DNI" placeholder="Tu DNI >_" required>
+<input type="email" name="Email" placeholder="Tu Gmail >_" required>
+<input type="text" name="Telefono" placeholder="Tu celu >_" required>
+<button type="submit">RASTREAME Y BORRAME</button>
+<p style="font-size:10px;color:#666;margin-top:8px;text-align:center">Te llega al toque a esberreta@gmail.com</p>
+</form>
+
+<div style="padding:30px 20px;max-width:600px">
+<h2 style="font-family:Anton">¿COMO SABES QUE ESTA BORRADO?</h2>
+<p style="color:#888;font-size:13px;margin-top:8px;line-height:1.5">Te mandamos captura de Dateas/Nosis con 0 resultados + N° de reclamo legal. Si volvés a aparecer en 30 días, lo borramos gratis.</p>
 </div>
-<script>
-const sitios=["DATEAS.COM","NOSIS.COM.AR","BUSCADATOS.COM.AR","PAGINASBLANCAS","VERAZ"];
-const logs=["> Escaneando... ","> Infiltrandonos en Dateas...","> Peleando con abogado de Nosis...","> Mintiendo que somos vos con traje...","> Borrando..."];
-function go(){let l=document.getElementById('log'),r=document.getElementById('res'),c=document.getElementById('cards'),pr=document.getElementById('proof');if(document.getElementById('dni').value.length<7){alert('DNI invalido');return}l.innerHTML="";r.style.display="block";c.innerHTML="";pr.style.display="none";let i=0;let it=setInterval(()=>{if(i<logs.length){l.innerHTML+=logs[i]+"<br>";i++}else{clearInterval(it);sitios.forEach((s,j)=>setTimeout(()=>{let d=document.createElement('div');d.className='card';d.innerHTML=`<span>${s}</span><span>ENCONTRADO</span>`;c.appendChild(d);setTimeout(()=>{d.classList.add('ok');d.innerHTML=`<span>${s}</span><span style=color:#FF2A2A>BORRADO ✓</span>`;if(j==4)pr.style.display='block'},800)},j*400))}},500)}
-</script>
 </body>
 </html>
