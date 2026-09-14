@@ -43,15 +43,14 @@
 <div class="hero">
 <div><div class="mono" style="font-size:11px;color:var(--blue);font-weight:700;margin-bottom:12px">○ PRIVACIDAD REAL</div><h1 class="h-title">Encontrá dónde están tus <em>datos.</em> Pedí que los <em>eliminen.</em></h1><p class="h-sub">Te ayudamos a detectar tu exposición en sitios de búsqueda de personas y directorios.</p></div>
 <div class="formCard">
-<form id="leadForm" action="https://formsubmit.co/esberreta@gmail.com" method="POST">
-<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME V2"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table">
+<form id="leadForm">
 <div class="field"><label><b>📱 Teléfono</b><span class="req">OBLIGATORIO</span></label><input name="Telefono" id="tel" type="tel" placeholder="+54 9 11..." required></div>
-<div class="field"><label><b>📧 Email</b><span class="opt">OPCIONAL</span></label><input name="Email" type="email" placeholder="tu@email.com"></div>
-<div class="field"><label><b>👤 Nombre</b><span class="opt">OPCIONAL</span></label><input name="Nombre" type="text" placeholder="Ej: Juan Pérez"></div>
-<div class="field"><label><b>🪪 DNI</b><span class="opt">OPCIONAL</span></label><input name="DNI" type="text" placeholder="Sin puntos"></div>
-<div class="field"><label><b>📍 Provincia</b><span class="opt">OPCIONAL</span></label><input name="Ubicacion" type="text" placeholder="Ej: CABA"></div>
+<div class="field"><label><b>📧 Email</b><span class="opt">OPCIONAL</span></label><input name="Email" id="email" type="email" placeholder="tu@email.com"></div>
+<div class="field"><label><b>👤 Nombre</b><span class="opt">OPCIONAL</span></label><input name="Nombre" id="nombre" type="text" placeholder="Ej: Juan Pérez"></div>
+<div class="field"><label><b>🪪 DNI</b><span class="opt">OPCIONAL</span></label><input name="DNI" id="dni" type="text" placeholder="Sin puntos"></div>
+<div class="field"><label><b>📍 Provincia</b><span class="opt">OPCIONAL</span></label><input name="Ubicacion" id="ubi" type="text" placeholder="Ej: CABA"></div>
 <div class="hint">Solo usamos lo necesario. Podés agregar más datos para mejorar la precisión.</div>
-<button class="btn" type="submit">🔎 Comenzar búsqueda</button>
+<button class="btn" type="submit" id="btnSubmit">🔎 Comenzar búsqueda</button>
 </form>
 </div>
 </div>
@@ -63,7 +62,8 @@
 <div id="sitesList" style="display:none">
 <div class="site"><div><b>DATEAS</b> <span class="level med">🟠 Media</span><div class="mono" style="font-size:11px;color:var(--muted);margin-top:6px">📱 Teléfono · 👤 Nombre</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('DATEAS')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
 <div class="site"><div><b>BUSCARDATOS.COM.AR</b> <span class="level high">🔴 Alta</span><div class="mono" style="font-size:11px;color:var(--muted);margin-top:6px">📱 Tel · 📍 Localidad</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('BUSCARDATOS')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
-<div class="site"><div><b>GUIATELEFONICA</b> <span class="level low">🟢 Baja</span><div class="mono" style="font-size:11px;color:var(--muted);margin-top:6px">📞 Número listado</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('GUIATELEFONICA')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
+<div class="site"><div><b>BUSCARCUIT / CUITONLINE</b> <span class="level med">🟠 Media</span><div class="mono" style="font-size:11px;color:var(--muted);margin-top:6px">🪪 CUIT · 📍 Domicilio fiscal</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('CUIT')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
+<div class="site"><div><b>NOSIS / VERAZ</b> <span class="level high">🔴 Alta</span><div class="mono" style="font-size:11px;color:var(--muted);margin-top:6px">💳 Score · 📍 Datos comerciales</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('NOSIS')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
 <div class="legal">Delete Me te ayuda a preparar la solicitud. Derechos según Ley 25.326 art. 16. No todos los sitios están obligados a eliminar automáticamente.</div>
 <button class="btn" style="margin-top:16px" onclick="location.reload()">← Nueva búsqueda</button>
 </div>
@@ -72,15 +72,29 @@
 <div id="modal"><div id="modalBox"><h3 id="mTitle" style="font-size:16px;font-weight:800;margin-bottom:10px"></h3><div id="mDesc" style="font-size:13px;color:var(--muted);line-height:1.5"></div><div id="mData" style="background:#0C0E1B;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:11px;margin:12px 0" class="mono"></div><button onclick="document.getElementById('modal').style.display='none'" style="width:100%;background:#0C0E1B;border:1px solid var(--line);color:#fff;padding:10px;border-radius:10px;font-weight:700;cursor:pointer">Cerrar</button></div></div>
 
 <script>
+const MAKE_WEBHOOK = "https://hook.us2.make.com/qbsdaosfh7etpb2xl38tc6nld58xayns";
 const form=document.getElementById('leadForm');
 form.addEventListener('submit', async(e)=>{
  e.preventDefault();
  const tel=document.getElementById('tel').value.trim();
+ const email=document.getElementById('email').value.trim();
+ const nombre=document.getElementById('nombre').value.trim();
+ const dni=document.getElementById('dni').value.trim();
+ const ubi=document.getElementById('ubi').value.trim();
  if(!tel)return;
+ document.getElementById('btnSubmit').textContent="⏳ Enviando...";
+ document.getElementById('btnSubmit').disabled=true;
+ // Envio a Make en background, no esperamos
+ fetch(MAKE_WEBHOOK,{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body: JSON.stringify({Telefono:tel, Email:email, Nombre:nombre, DNI:dni, Ubicacion:ubi, Timestamp: new Date().toISOString(), Fuente: 'deleteme.com.ar'})
+ }).catch(()=>{});
+ // UI de escaneo
  document.getElementById('mainView').style.display='none';
  document.getElementById('resultsView').style.display='block';
  document.getElementById('scanTel').textContent=tel;
- let p=0; const logs=["People Search...","Data Brokers...","Directorios...","Bases públicas...","Generando informe..."];
+ let p=0; const logs=["People Search...","Data Brokers...","Directorios...","Bases publicas...","Generando informe..."];
  let li=0;
  const it=setInterval(()=>{
    p+=20; if(p>100)p=100;
@@ -88,25 +102,23 @@ form.addEventListener('submit', async(e)=>{
    if(li<logs.length){document.getElementById('scanLog').textContent=logs[li];li++}
    if(p>=100){clearInterval(it);setTimeout(()=>{document.getElementById('scanBox').style.display='none';document.getElementById('sitesList').style.display='block';},500)}
  },300);
- try{ await fetch(form.action,{method:'POST',body:new FormData(form)}) }catch{}
 });
 async function verInfo(sitio){
  const tel=document.getElementById('tel').value||'';
- const q=encodeURIComponent(tel);
- let url=""; let name="";
- if(sitio==='DATEAS'){ url=`https://www.dateas.com/`; name="Dateas"; }
- if(sitio==='BUSCARDATOS'){ url=`https://www.buscardatos.com.ar/`; name="Buscardatos"; }
- if(sitio==='GUIATELEFONICA'){ url=`https://www.telexplorer.com.ar/`; name="Telexplorer"; }
+ let url=""; let name=sitio;
+ if(sitio==='DATEAS'){ url=`https://www.dateas.com/`; }
+ if(sitio==='BUSCARDATOS'){ url=`https://www.buscardatos.com.ar/`; }
+ if(sitio==='CUIT'){ url=`https://www.cuitonline.com/`; name="CuitOnline"; }
+ if(sitio==='NOSIS'){ url=`https://www.nosis.com/`; }
  try{ await navigator.clipboard.writeText(tel); }catch{}
  document.getElementById('modal').style.display='flex';
- document.getElementById('mTitle').textContent=sitio + " - Verificación";
+ document.getElementById('mTitle').textContent=sitio + " - Verificacion";
  document.getElementById('mDesc').innerHTML=`
-  <b style="color:#fff">Número copiado: ${tel} 📋</b><br><br>
-  ${sitio} bloquea búsquedas directas por link. Te abrimos su buscador oficial, solo tenés que pegar (Ctrl+V).<br><br>
+  <b style="color:#fff">Numero copiado: ${tel} 📋</b><br><br>
+  Te abrimos el buscador oficial, pega tu numero (Ctrl+V) para verificar si apareces.<br><br>
   <a href="${url}" target="_blank" style="display:block;background:#2B5AFF;color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:800;font-size:14px;text-align:center">🔗 Abrir ${name} y verificar →</a>
-  <a href="https://www.google.com/search?q=site:${sitio.toLowerCase().replace('.com.ar','')}.com.ar+${q}" target="_blank" style="display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:12px;text-decoration:underline">Ver prueba en Google (site:${sitio.toLowerCase()})</a>
  `;
- document.getElementById('mData').innerHTML=`📱 Buscando: ${tel}<br><br>Pasos:<br>1. Tocá Abrir ${name}<br>2. Pegá tu número<br>3. Si aparecés, volvé y solicitá eliminación`;
+ document.getElementById('mData').innerHTML=`📱 Buscando: ${tel}<br><br>Pasos: 1. Abrir ${name} 2. Pegar 3. Si apareces, volver y solicitar eliminacion`;
 }
 function solicitar(btn){btn.textContent='✓ Solicitud preparada';btn.style.background='#1EFF8A';btn.style.color='#000';btn.disabled=true;}
 </script>
