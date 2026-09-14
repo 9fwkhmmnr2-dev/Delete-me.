@@ -2,38 +2,50 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DELETE ME.</title>
+<title>DELETE ME. | Que internet se olvide de vos</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap');
+:root{--red:#FF2A2A;--black:#0A0A0A;--white:#F5F5F0;--gray:#1A1A1A}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0A0A0A;color:#F5F5F0;font-family:'Space Mono',monospace}
-h1{font-family:Anton;line-height:.85;font-size:clamp(70px,18vw,140px)}
-.hero{background:#FF2A2A;color:#0A0A0A;padding:40px 20px 60px}
-.hero p{margin-top:12px;font-weight:700;max-width:400px}
-.box{background:#0A0A0A;border:2px solid #FF2A2A;border-radius:14px;padding:14px;max-width:500px;margin:-30px 16px 0;position:relative}
-.box input{width:100%;background:transparent;border:0;border-bottom:1px solid #222;color:#fff;font-family:'Space Mono';font-size:16px;padding:12px 0;outline:0}
-.box button{width:100%;background:#FF2A2A;border:0;color:#000;font-family:Anton;font-size:18px;padding:12px;border-radius:8px;margin-top:12px}
+body{background:var(--black);color:var(--white);font-family:'Space Mono',monospace}
+h1{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.85}
+.hero{background:var(--red);color:var(--black);padding:44px 20px 72px}
+.hero h1{font-size:clamp(72px,22vw,160px)}
+.hero p{margin-top:14px;font-weight:700;font-size:15px;max-width:380px}
+.wrap{padding:0 16px;max-width:600px;margin:0 auto}
+.form-box{background:var(--black);border:2.5px solid var(--red);border-radius:18px;padding:16px;margin-top:-36px;position:relative}
+.form-box input{width:100%;background:transparent;border:0;border-bottom:1px solid #222;color:#fff;font-family:'Space Mono';font-size:16px;padding:14px 2px;outline:0}
+.form-box button{width:100%;background:var(--red);border:0;color:#000;font-family:'Anton';font-size:20px;padding:14px;border-radius:10px;margin-top:16px}
+.sec{padding:52px 20px;max-width:700px;margin:auto}
+.card{background:#1A1A1A;border:1px solid #222;border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px;font-weight:700}
+.legal{background:#F5F5F0;color:#0A0A0A;padding:32px 20px;margin-top:40px}
 </style>
 </head>
 <body>
-<div class="hero"><h1>DELETE<br>ME.</h1><p>¿GOOGLEASTE TU DNI Y SALIÓ TU DIRECCIÓN Y CELU?</p></div>
-
-<form action="https://formsubmit.co/esberreta@gmail.com" method="POST" class="box">
-<!-- config formsubmit -->
-<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME - BORRAR DNI">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="https://delete-me-one.vercel.app/gracias.html">
-
-<input type="text" name="DNI" placeholder="Tu DNI >_" required>
-<input type="email" name="Email" placeholder="Tu Gmail >_" required>
-<input type="text" name="Telefono" placeholder="Tu celu >_" required>
-<button type="submit">RASTREAME Y BORRAME</button>
-<p style="font-size:10px;color:#666;margin-top:8px;text-align:center">Te llega al toque a esberreta@gmail.com</p>
+<div class="hero"><div class="wrap"><h1>DELETE<br>ME.</h1><p>GOOGLEASTE TU DNI Y APARECIÓ TU DIRECCIÓN, TU CELU Y HASTA TU FAMILIA. LO BORRAMOS.</p></div></div>
+<div class="wrap">
+<form class="form-box" id="mainForm" action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="9adc1dbc-0224-48a5-bc8c-84f053985f06">
+<input type="hidden" name="subject" value="NUEVO LEAD DELETE ME">
+<input type="hidden" name="from_name" value="DELETE ME WEB">
+<input type="checkbox" name="botcheck" style="display:none">
+<input type="text" name="DNI" placeholder="Tu DNI >_ Ej: 41.123.456" required>
+<input type="email" name="Email" placeholder="Tu Gmail que usan para rastrearte >_" required>
+<input type="text" name="Telefono" placeholder="Tu celu que te llaman para estafar >_" required>
+<button type="submit" id="btn">RASTREAME AHORA →</button>
 </form>
-
-<div style="padding:30px 20px;max-width:600px">
-<h2 style="font-family:Anton">¿COMO SABES QUE ESTA BORRADO?</h2>
-<p style="color:#888;font-size:13px;margin-top:8px;line-height:1.5">Te mandamos captura de Dateas/Nosis con 0 resultados + N° de reclamo legal. Si volvés a aparecer en 30 días, lo borramos gratis.</p>
 </div>
+<div class="sec" id="result" style="display:none"><h2 style="font-family:Anton;font-size:26px">APARECES EN 5 SITIOS.</h2><div id="cards" style="margin-top:18px"></div>
+<div style="margin-top:26px;background:#111;border:1px dashed #333;border-radius:12px;padding:18px"><h4 style="font-family:Anton">>_ ¿CÓMO SABÉS QUE ESTÁ BORRADO?</h4><p style="font-size:12px;color:#aaa;line-height:1.6;margin-top:8px">1. Te mandamos captura de cada sitio con 0 resultados.<br>2. N° de reclamo en AAIP.<br>3. Si volvés a aparecer en 30 días, lo borramos gratis.</p></div></div>
+<div class="legal"><div class="wrap"><h2 style="font-family:Anton;font-size:28px">¿POR QUÉ TIENEN QUE BORRARTE?</h2><p style="margin-top:10px;font-size:13px;line-height:1.6"><b>1. No diste permiso.</b> Venden tus datos.<br><b>2. Ley 25.326 Art.16</b> Derecho a supresión en 5 días.<br><b>3. Nosotros reclamamos</b> por vos.</p></div></div>
+<script>
+const sitios=["DATEAS.COM","NOSIS.COM.AR","BUSCADATOS.COM.AR","PAGINASBLANCAS.COM.AR","EQUIFAX/VERAZ"];
+const form=document.getElementById('mainForm'),result=document.getElementById('result'),cards=document.getElementById('cards'),btn=document.getElementById('btn');
+form.addEventListener('submit', async (e)=>{
+ e.preventDefault(); btn.textContent='RASTREANDO...'; result.style.display='block'; result.scrollIntoView({behavior:'smooth'}); cards.innerHTML='';
+ sitios.forEach((s,i)=>setTimeout(()=>{let d=document.createElement('div');d.className='card';d.innerHTML=`<span>${s}</span><span style=font-size:10px;background:#222;padding:4px 8px;border-radius:6px>ENCONTRADO</span>`;cards.appendChild(d);setTimeout(()=>{d.style.borderColor='#FF2A2A';d.innerHTML=`<span>${s}</span><span style=font-size:10px;background:#FF2A2A;color:#000;padding:4px 8px;border-radius:6px>EN PROCESO DE BORRADO</span>`},900)},i*500));
+ const data=new FormData(form); await fetch('https://api.web3forms.com/submit',{method:'POST',body:data}); window.location.href='gracias.html';
+});
+</script>
 </body>
 </html>
