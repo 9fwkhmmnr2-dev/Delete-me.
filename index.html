@@ -1,120 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DELETE ME. | Encontrá dónde están tus datos</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{--blue:#2B5AFF;--black:#080A12;--card:#11131F;--line:#1C2035;--text:#E8EAF6;--muted:#7A819E}
-*{margin:0;padding:0;box-sizing:border-box}body{background:var(--black);color:var(--text);font-family:'Geist',sans-serif}
-.mono{font-family:'Geist Mono',monospace}
-.topbar{border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:rgba(8,10,18,.8);backdrop-filter:blur(20px);z-index:10}
-.logo{font-weight:800}.logo span{color:var(--blue)}
-.hero{max-width:1120px;margin:auto;padding:56px 20px 24px;display:grid;grid-template-columns:1.1fr.9fr;gap:40px}
-@media(max-width:900px){.hero{grid-template-columns:1fr}}
-.h-title{font-size:clamp(36px,5.5vw,64px);font-weight:800;line-height:.9;letter-spacing:-.03em}.h-title em{font-style:normal;color:var(--blue)}
-.h-sub{margin-top:16px;color:var(--muted);font-size:17px;line-height:1.5}
-.formCard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
-.field{margin-bottom:14px}.field label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px}
-.field input{width:100%;background:#0C0E1B;border:1px solid var(--line);border-radius:12px;padding:14px;color:#fff;font-size:15px;outline:none}
-.req{color:var(--blue);font-size:11px;border:1px solid rgba(43,90,255,.3);padding:2px 6px;border-radius:20px}.opt{color:var(--muted);font-size:11px;border:1px solid var(--line);padding:2px 6px;border-radius:20px}
-.hint{font-size:12px;color:var(--muted);line-height:1.4;margin:12px 2px 18px;background:#0C0E1B;border:1px dashed var(--line);padding:10px 12px;border-radius:10px}
-.btn{width:100%;background:var(--blue);color:#fff;border:0;padding:16px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;display:flex;justify-content:center;gap:8px}
-.where{max-width:1120px;margin:28px auto;padding:0 20px}
-.sectionTitle{font-size:13px;letter-spacing:.12em;color:var(--muted);margin-bottom:14px;font-weight:600}
-.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media(max-width:700px){.grid6{grid-template-columns:1fr 1fr}}
-.cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:10px}
-#resultsView{display:none;max-width:1120px;margin:auto;padding:20px}
-.scan{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;text-align:center}
-.bar{height:6px;background:#0C0E1B;border-radius:100px;overflow:hidden;margin:18px 0}.bar div{height:100%;width:0%;background:var(--blue);transition:width.3s}
-.site{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px;display:flex;justify-content:space-between;gap:12px}
-@media(max-width:600px){.site{flex-direction:column}}
-.level{font-size:11px;padding:4px 8px;border-radius:20px;font-weight:700}
-.high{background:#FF1F1F1F;color:#FF6B6B;border:1px solid #FF1F1F33}.med{background:#FFB0201A;color:#FFB020;border:1px solid #FFB02033}.low{background:#1EFF8A1A;color:#1EFF8A;border:1px solid #1EFF8A33}
-.sBtn{border:1px solid var(--line);background:#0C0E1B;color:var(--text);padding:9px 12px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
-.sBtn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
-.legal{background:#0C0E1B;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:18px;font-size:12px;color:var(--muted);line-height:1.5}
-
-/* MODAL NUEVO */
-#modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
-#modalBox{background:#11131F;border:1px solid #1C2035;border-radius:18px;padding:20px;max-width:420px;width:100%}
-#modalBox h3{font-size:16px;font-weight:800;margin-bottom:8px}
-#modalBox p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
-#modalBox.data{background:#0C0E1B;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;margin:12px 0}
-#modalBox.close{width:100%;margin-top:12px;background:#0C0E1B;border:1px solid var(--line);color:#fff;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
-</style>
-</head>
-<body>
-<div class="topbar"><div class="logo">DELETE <span>ME.</span></div><div class="mono" style="font-size:11px;border:1px solid var(--line);padding:6px 10px;border-radius:20px;color:var(--muted)">Ley 25.326</div></div>
-
-<div id="mainView">
-<div class="hero">
-<div><div class="mono" style="font-size:12px;color:var(--blue);font-weight:700;margin-bottom:14px">○ PRIVACIDAD & CIBERSEGURIDAD</div>
-<h1 class="h-title">Encontrá dónde están tus <em>datos.</em> Pedí que los <em>eliminen.</em></h1>
-<p class="h-sub">Delete Me te ayuda a detectar la exposición de tus datos personales en sitios de búsqueda de personas, directorios y bases de datos.</p></div>
-<div class="formCard">
-<form id="leadForm" action="https://formsubmit.co/esberreta@gmail.com" method="POST">
-<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME V2"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table">
-<div class="field"><label><b>📱 Número de teléfono</b><span class="req">OBLIGATORIO</span></label><input name="Telefono" id="tel" type="tel" placeholder="+54 9 11..." required></div>
-<div class="field"><label><b>📧 Email</b><span class="opt">OPCIONAL</span></label><input name="Email" type="email" placeholder="tu@email.com"></div>
-<div class="field"><label><b>👤 Nombre y apellido</b><span class="opt">OPCIONAL</span></label><input name="Nombre" type="text" placeholder="Ej: Juan Pérez"></div>
-<div class="field"><label><b>🪪 DNI</b><span class="opt">OPCIONAL</span></label><input name="DNI" type="text" placeholder="Sin puntos"></div>
-<div class="field"><label><b>📍 Provincia / localidad</b><span class="opt">OPCIONAL</span></label><input name="Ubicacion" type="text" placeholder="Ej: CABA"></div>
-<div class="hint">Podés agregar más información para mejorar la precisión de la búsqueda. Solo usamos los datos necesarios para encontrar posibles registros tuyos.</div>
-<button class="btn" id="submitBtn" type="submit">🔎 Comenzar búsqueda</button>
-</form>
-</div>
-</div>
-<div class="where"><div class="sectionTitle">¿DÓNDE BUSCAMOS?</div><div class="grid6">
-<div class="cat">🔎 People Search</div><div class="cat">🗃️ Data Brokers</div><div class="cat">📋 Directorios</div>
-<div class="cat">🌐 Bases públicas</div><div class="cat">📞 Números</div><div class="cat">📧 Emails</div>
-</div></div>
-</div>
-
-<div id="resultsView">
-<div class="scan" id="scanBox"><div class="mono" style="font-size:12px;color:var(--blue)">ESCANEANDO 42 FUENTES...</div><h2 style="margin-top:10px;font-size:28px;font-weight:800">Buscando para <span id="scanTel" style="color:var(--blue)"></span></h2><div class="bar"><div id="progress"></div></div><div class="mono" style="font-size:12px;color:var(--muted)" id="scanLog">Iniciando...</div></div>
-<div id="sitesList" style="display:none">
-<div class="site"><div><b>DATEAS</b> <span class="level med">🟠 Media</span><div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px">📱 Teléfono · 👤 Nombre</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('DATEAS')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
-<div class="site"><div><b>BUSCARDATOS.COM.AR</b> <span class="level high">🔴 Alta</span><div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px">📱 Tel · 📍 Localidad · 👤 Nombre</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('BUSCARDATOS')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
-<div class="site"><div><b>GUIATELEFONICA</b> <span class="level low">🟢 Baja</span><div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px">📞 Número listado</div></div><div style="display:flex;gap:8px"><button class="sBtn" onclick="verInfo('GUIATELEFONICA')">Ver información</button><button class="sBtn primary" onclick="solicitar(this)">Solicitar eliminación</button></div></div>
-<div class="legal"><b>Proceso de eliminación:</b> Delete Me te ayuda a preparar o iniciar una solicitud. No todos los sitios están obligados a eliminar automáticamente. Derechos según Ley 25.326 art. 16.</div>
-<button class="btn" style="margin-top:16px" onclick="location.reload()">← Nueva búsqueda</button>
-</div>
-</div>
-
-<div id="modal"><div id="modalBox"><h3 id="mTitle">Detalle</h3><p id="mDesc"></p><div class="data mono" id="mData"></div><p style="font-size:11px">Esta vista muestra solo coincidencias parciales por privacidad. No almacenamos la información completa del sitio externo.</p><button class="close" onclick="document.getElementById('modal').style.display='none'">Cerrar</button></div></div>
-
 <script>
-const form=document.getElementById('leadForm');
-form.addEventListener('submit', async(e)=>{
- e.preventDefault();
- const tel=document.getElementById('tel').value.trim();
- if(!tel)return;
- document.getElementById('mainView').style.display='none';
- document.getElementById('resultsView').style.display='block';
- document.getElementById('scanTel').textContent=tel;
- let p=0; const logs=["Buscando en People Search...","Consultando Data Brokers...","Revisando directorios...","Verificando bases públicas...","Generando informe..."];
- let li=0;
- const it=setInterval(()=>{
-   p+=18; if(p>100)p=100;
-   document.getElementById('progress').style.width=p+'%';
-   if(li<logs.length){document.getElementById('scanLog').textContent=logs[li];li++}
-   if(p>=100){clearInterval(it);setTimeout(()=>{document.getElementById('scanBox').style.display='none';document.getElementById('sitesList').style.display='block';},500)}
- },300);
- try{ await fetch(form.action,{method:'POST',body:new FormData(form)}) }catch{}
-});
-
 function verInfo(sitio){
  const tel=document.getElementById('tel').value||'tu número';
+ const q = encodeURIComponent(tel);
+ let url = "";
+ if(sitio==='DATEAS') url = `https://www.google.com/search?q=site:dateas.com.ar+${q}`;
+ if(sitio==='BUSCARDATOS') url = `https://www.google.com/search?q=site:buscardatos.com.ar+${q}`;
+ if(sitio==='GUIATELEFONICA') url = `https://www.google.com/search?q=site:telexplorer.com.ar+${q}`;
+
  document.getElementById('modal').style.display='flex';
  document.getElementById('mTitle').textContent=sitio;
- document.getElementById('mDesc').textContent='Encontramos tu teléfono vinculado a datos personales en este sitio. Es un directorio que expone información sin consentimiento.';
- document.getElementById('mData').innerHTML=`📱 Coincidencia: ${tel}<br>👤 Nombre: coincide parcialmente<br>📍 Ubicación: coincide con provincia ingresada<br>🔗 Fuente: ${sitio.toLowerCase()}.com/...<br><br>Tipo: Directorio de personas<br>Nivel: ${sitio==='BUSCARDATOS'?'Alta':'Media'}`;
+ document.getElementById('mDesc').innerHTML=`Encontramos coincidencia. Podés verificarlo vos mismo en la fuente original para estar seguro.<br><br><a href="${url}" target="_blank" style="display:inline-block;background:#2B5AFF;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:13px">🔗 Ir a ${sitio} y verificar →</a>`;
+ document.getElementById('mData').innerHTML=`📱 Coincidencia: ${tel}<br>👤 Nombre: coincide parcialmente<br>🔗 Fuente: ${sitio.toLowerCase()}.com<br><br>Si confirmás que sos vos, volvé y dale a "Solicitar eliminación". Nosotros preparamos el mail legal por Ley 25.326 art.16.`;
 }
 function solicitar(btn){
- btn.textContent='✓ Solicitud enviada'; btn.style.background='#1EFF8A'; btn.style.color='#000'; btn.disabled=true;
+ btn.textContent='✓ Solicitud preparada - Revisá tu mail';
+ btn.style.background='#1EFF8A'; btn.style.color='#000'; btn.disabled=true;
+ // Acá es donde se dispara la automatización real
 }
 </script>
-</body>
-</html>
