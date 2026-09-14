@@ -1,35 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DELETE ME.</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--red:#FF2A2A;--black:#0A0A0A}*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--black);color:#fff;font-family:'Space Mono'} h1{font-family:Anton;line-height:.85;font-size:clamp(70px,22vw,160px)}
-.hero{background:var(--red);color:#000;padding:42px 20px 70px} .wrap{max-width:540px;margin:auto;padding:0 16px}
-.box{background:#0A0A0A;border:2.5px solid var(--red);border-radius:18px;padding:16px;margin-top:-34px}
-.box input{width:100%;background:transparent;border:0;border-bottom:1px solid #222;color:#fff;padding:14px 2px;font-size:16px;outline:0}
-.box button{width:100%;background:var(--red);border:0;color:#000;font-family:Anton;font-size:20px;padding:14px;border-radius:10px;margin-top:16px}
-#ok{display:none;background:#00FF88;color:#000;padding:18px;border-radius:12px;margin-top:16px;font-weight:700;text-align:center}
-</style></head>
-<body>
-<div class="hero"><div class="wrap"><h1>DELETE<br>ME.</h1><p style="font-weight:700;margin-top:12px">¿GOOGLEASTE TU DNI Y SALIO TU DIRECCION? LO BORRAMOS.</p></div></div>
-<div class="wrap"><div class="box">
-<form id="mainForm" action="https://formsubmit.co/esberreta@gmail.com" method="POST">
-<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table">
-<input type="text" name="DNI" placeholder="DNI >_" required>
-<input type="email" name="Email" placeholder="Email >_" required>
-<input type="text" name="Telefono" placeholder="Celu >_" required>
-<button id="btn" type="submit">RASTREAME Y BORRAME →</button>
+<form action="https://formsubmit.co/esberreta@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="text" name="DNI" placeholder="DNI" required>
+<input type="email" name="Email" placeholder="Email" required>
+<input type="text" name="Telefono" placeholder="Celu" required>
+<button type="submit">ENVIAR TEST</button>
 </form>
-<div id="ok">✓ LISTO. Ya recibimos tus datos en esberreta@gmail.com<br><span style="font-weight:400;font-size:12px">Te escribimos en 2hs con el comprobante.</span></div>
-</div></div>
-<script>
-const form=document.getElementById('mainForm'),btn=document.getElementById('btn'),ok=document.getElementById('ok');
-form.addEventListener('submit',async(e)=>{
- e.preventDefault(); btn.textContent="ENVIANDO...";
- try{ await fetch(form.action,{method:'POST',body:new FormData(form)}); ok.style.display='block'; btn.textContent="ENVIADO ✓"; form.reset(); }
- catch(err){ alert('Error'); btn.textContent="RASTREAME Y BORRAME →"; }
-});
-</script>
-</body>
-</html>
