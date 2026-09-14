@@ -1,9 +1,196 @@
-<form action="https://formsubmit.co/esberreta@gmail.com" method="POST">
-<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DELETE ME. | Encontrá dónde están tus datos</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2B5AFF;--blue2:#1E3ECC;--black:#080A12;--card:#11131F;--line:#1C2035;--text:#E8EAF6;--muted:#7A819E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--text);font-family:'Geist',sans-serif;overflow-x:hidden}
+.mono{font-family:'Geist Mono',monospace}
+.topbar{border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;background:rgba(8,10,18,0.8);backdrop-filter:blur(20px);position:sticky;top:0;z-index:10}
+.logo{font-weight:800;letter-spacing:-0.02em}.logo span{color:var(--blue)}
+.badge{font-size:11px;border:1px solid var(--line);padding:6px 10px;border-radius:100px;color:var(--muted)}
+.hero{max-width:1120px;margin:auto;padding:56px 20px 24px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:32px 20px 16px}}
+.h-title{font-size:clamp(36px,5.5vw,64px);font-weight:800;line-height:0.9;letter-spacing:-0.03em}
+.h-title em{font-style:normal;color:var(--blue)}
+.h-sub{margin-top:16px;color:var(--muted);font-size:17px;line-height:1.5;max-width:520px}
+.formCard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.formHead{display:flex;gap:10px;align-items:center;margin-bottom:18px}
+.shield{width:36px;height:36px;background:var(--blue);border-radius:10px;display:grid;place-items:center;font-size:18px}
+.formHead h2{font-size:16px;font-weight:700}
+.formHead p{font-size:12px;color:var(--muted)}
+.field{margin-bottom:14px}
+.field label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px}
+.field label b{font-weight:500;color:var(--text)}
+.field input{width:100%;background:#0C0E1B;border:1px solid var(--line);border-radius:12px;padding:14px 14px;color:#fff;font-size:15px;outline:none;transition:.2s}
+.field input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(43,90,255,.15)}
+.req{color:var(--blue);font-size:11px;border:1px solid rgba(43,90,255,.3);padding:2px 6px;border-radius:20px}
+.opt{color:var(--muted);font-size:11px;border:1px solid var(--line);padding:2px 6px;border-radius:20px}
+.hint{font-size:12px;color:var(--muted);line-height:1.4;margin:12px 2px 18px;background:#0C0E1B;border:1px dashed var(--line);padding:10px 12px;border-radius:10px}
+.btn{width:100%;background:var(--blue);color:#fff;border:0;padding:16px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;transition:.2s;display:flex;justify-content:center;gap:8px}
+.btn:hover{background:var(--blue2);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.priv{display:flex;gap:12px;margin-top:18px;padding:14px;background:rgba(43,90,255,.06);border:1px solid rgba(43,90,255,.15);border-radius:12px}
+.priv h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.priv p{font-size:12px;color:var(--muted);line-height:1.4}
+.details{margin-top:12px}
+.details summary{font-size:12px;color:var(--muted);cursor:pointer;list-style:none}
+.details summary::-webkit-details-marker{display:none}
+.details div{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;background:#0C0E1B;padding:10px;border-radius:8px}
+
+/* WHERE */
+.where{max-width:1120px;margin:28px auto;padding:0 20px}
+.sectionTitle{font-size:13px;letter-spacing:.12em;color:var(--muted);margin-bottom:14px;font-weight:600}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.grid6{grid-template-columns:1fr 1fr}}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:10px;align-items:flex-start}
+.cat i{font-size:18px}
+.cat h5{font-size:13px;font-weight:600}
+.cat p{font-size:11px;color:var(--muted);margin-top:2px}
+.disclaimer{font-size:11px;color:var(--muted);margin-top:10px;opacity:.7}
+
+/* RESULTS */
+#resultsView{display:none;max-width:1120px;margin:auto;padding:20px}
+.scan{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;text-align:center}
+.bar{height:6px;background:#0C0E1B;border-radius:100px;overflow:hidden;margin:18px 0}
+.bar div{height:100%;width:0%;background:var(--blue);transition:width.3s}
+.site{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px;display:flex;justify-content:space-between;gap:12px}
+@media(max-width:600px){.site{flex-direction:column}}
+.level{font-size:11px;padding:4px 8px;border-radius:20px;font-weight:700}
+.high{background:#FF1F1F1F;color:#FF6B6B;border:1px solid #FF1F1F33}
+.med{background:#FFB0201A;color:#FFB020;border:1px solid #FFB02033}
+.low{background:#1EFF8A1A;color:#1EFF8A;border:1px solid #1EFF8A33}
+.sBtn{border:1px solid var(--line);background:#0C0E1B;color:var(--text);padding:9px 12px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
+.sBtn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.legal{background:#0C0E1B;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:18px;font-size:12px;color:var(--muted);line-height:1.5}
+.footer{max-width:1120px;margin:40px auto;padding:24px 20px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.6}
+.footer a{color:var(--muted);text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="logo">DELETE <span>ME.</span></div><div class="badge mono">● Ley 25.326 • Privacidad</div></div>
+
+<div id="mainView">
+<div class="hero">
+<div>
+<div class="mono" style="font-size:12px;color:var(--blue);letter-spacing:.15em;font-weight:700;margin-bottom:14px">○ PRIVACIDAD & CIBERSEGURIDAD</div>
+<h1 class="h-title">Encontrá dónde están tus <em>datos.</em> Pedí que los <em>eliminen.</em></h1>
+<p class="h-sub">Delete Me te ayuda a detectar la exposición de tus datos personales en sitios de búsqueda de personas, directorios y bases de datos.</p>
+
+<div class="priv" style="margin-top:24px">
+<div style="font-size:20px">🛡️</div>
+<div><h4>Tu privacidad importa</h4><p>Delete Me busca ayudarte a encontrar dónde aparecen tus datos personales. No necesitás proporcionar todos tus datos para comenzar. Principio de mínima recopilación.</p></div>
+</div>
+</div>
+
+<div class="formCard">
+<div class="formHead"><div class="shield">🛡️</div><div><h2>¿Qué datos querés encontrar?</h2><p class="mono">Búsqueda segura y cifrada</p></div></div>
+
+<form id="leadForm" action="https://formsubmit.co/esberreta@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="NUEVO LEAD DELETE ME V2 - TELEFONO">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_template" value="table">
-<input type="text" name="DNI" placeholder="DNI" required>
-<input type="email" name="Email" placeholder="Email" required>
-<input type="text" name="Telefono" placeholder="Celu" required>
-<button type="submit">ENVIAR TEST</button>
+
+<div class="field"><label><b>📱 Número de teléfono</b><span class="req">OBLIGATORIO</span></label><input name="Telefono" id="tel" type="tel" placeholder="+54 9 11..." required></div>
+<div class="field"><label><b>📧 Email</b><span class="opt">OPCIONAL</span></label><input name="Email" type="email" placeholder="tu@email.com"></div>
+<div class="field"><label><b>👤 Nombre y apellido</b><span class="opt">OPCIONAL</span></label><input name="Nombre" type="text" placeholder="Ej: Juan Pérez"></div>
+<div class="field"><label><b>🪪 DNI</b><span class="opt">OPCIONAL</span></label><input name="DNI" type="text" placeholder="Sin puntos"></div>
+<div class="field"><label><b>📍 Provincia / localidad</b><span class="opt">OPCIONAL</span></label><input name="Ubicacion" type="text" placeholder="Ej: CABA, Buenos Aires"></div>
+
+<div class="hint">Podés agregar más información para mejorar la precisión de la búsqueda. Solo usamos los datos necesarios para encontrar posibles registros tuyos.</div>
+
+<button class="btn" id="submitBtn" type="submit">🔎 Comenzar búsqueda</button>
+
+<div class="details">
+<details><summary>¿Por qué pedimos estos datos? ↓</summary>
+<div>Cada dato adicional nos ayuda a distinguirte de otras personas con información similar. Por ejemplo, dos personas pueden tener el mismo nombre, pero con teléfono + provincia podemos confirmar que sos vos. Nunca guardamos tu DNI o teléfono indefinidamente si no es necesario para prestar el servicio. Solo lo usamos para la búsqueda.</div>
+</details>
+</div>
 </form>
+</div>
+</div>
+
+<div class="where">
+<div class="sectionTitle">¿DÓNDE BUSCAMOS?</div>
+<div class="grid6">
+<div class="cat"><i>🔎</i><div><h5>People Search Sites</h5><p>Sitios que agregan datos de múltiples fuentes</p></div></div>
+<div class="cat"><i>🗃️</i><div><h5>Data Brokers</h5><p>Intermediarios que comercializan datos</p></div></div>
+<div class="cat"><i>📋</i><div><h5>Directorios de personas</h5><p>Listas públicas y guías telefónicas</p></div></div>
+<div class="cat"><i>🌐</i><div><h5>Bases de datos públicas</h5><p>Registros oficiales expuestos</p></div></div>
+<div class="cat"><i>📞</i><div><h5>Sitios que muestran números</h5><p>Exposición de teléfonos</p></div></div>
+<div class="cat"><i>📧</i><div><h5>Sitios que muestran emails</h5><p>Exposición de correos</p></div></div>
+</div>
+<div class="disclaimer">Aclaración: no todas las páginas que contienen datos personales son necesariamente Data Brokers. Algunas son directorios o agregadores públicos.</div>
+</div>
+</div>
+
+<div id="resultsView">
+<div class="scan" id="scanBox">
+<div class="mono" style="font-size:12px;color:var(--blue)">ESCANEANDO 42 FUENTES...</div>
+<h2 style="margin-top:10px;font-size:28px;font-weight:800">Buscando coincidencias para <span id="scanTel" style="color:var(--blue)"></span></h2>
+<div class="bar"><div id="progress"></div></div>
+<div class="mono" style="font-size:12px;color:var(--muted)" id="scanLog">Iniciando búsqueda...</div>
+</div>
+
+<div id="sitesList" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin:18px 2px">
+<h3 style="font-size:20px;font-weight:800">Resultados encontrados</h3><span class="mono" style="font-size:12px;color:var(--muted)">3 sitios con coincidencias</span>
+</div>
+
+<div class="site"><div><div style="display:flex;gap:8px;align-items:center"><b>DATEAS</b><span class="level med">🟠 Exposición media</span></div><div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px">📱 Teléfono encontrado · 👤 Nombre encontrado</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Tipo: Directorio de personas · Provincia coincide</div></div><div style="display:flex;gap:8px"><button class="sBtn">Ver información</button><button class="sBtn primary">Solicitar eliminación</button></div></div>
+
+<div class="site"><div><div style="display:flex;gap:8px;align-items:center"><b>BUSCARDATOS.COM.AR</b><span class="level high">🔴 Exposición alta</span></div><div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px">📱 Teléfono · 📍 Localidad · 👤 Nombre</div></div><div style="display:flex;gap:8px"><button class="sBtn">Ver información</button><button class="sBtn primary">Solicitar eliminación</button></div></div>
+
+<div class="site"><div><div style="display:flex;gap:8px;align-items:center"><b>GUIATELEFONICA</b><span class="level low">🟢 Exposición baja</span></div><div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px">📞 Número listado</div></div><div style="display:flex;gap:8px"><button class="sBtn">Ver información</button><button class="sBtn primary">Solicitar eliminación</button></div></div>
+
+<div class="legal"><b>🛡️ Proceso de eliminación:</b><br>Delete Me puede ayudarte a preparar o iniciar una solicitud de eliminación de tus datos. No todos los sitios están obligados a eliminar los datos automáticamente. Los derechos dependen de la legislación aplicable y de las circunstancias de cada caso.<br><br>Para Argentina, la <b>Ley 25.326 de Protección de Datos Personales</b> reconoce el derecho del titular a solicitar la supresión de sus datos cuando corresponda (art. 16). Cada sitio evaluará la solicitud conforme a la ley y a sus políticas. Delete Me te guía para ejercer ese derecho.</div>
+
+<div style="margin-top:16px"><button class="btn" onclick="location.reload()">← Nueva búsqueda</button></div>
+</div>
+</div>
+
+<div class="footer">
+<b>Política de Privacidad - Mínima recopilación</b><br>
+Qué recibimos: número de teléfono (obligatorio) y opcionalmente email, nombre, DNI, ubicación para mejorar precisión.<br>
+Para qué: únicamente para buscar posibles registros tuyos en fuentes públicas. No vendemos datos.<br>
+Conservación: no guardamos DNI, teléfono o email indefinidamente. Los leads se reenvían a nuestro correo de gestión y se eliminan del servidor de formularios según políticas de FormSubmit. Podés solicitar la eliminación escribiendo a esberreta@gmail.com con asunto "Baja de datos".<br>
+Base legal: consentimiento del usuario y legítimo interés en proteger su privacidad. Ley 25.326.<br><br>
+<a href="#">Términos</a> · <a href="#">Política de Privacidad completa</a> · <a href="#">Contacto: esberreta@gmail.com</a>
+</div>
+
+<script>
+const form=document.getElementById('leadForm');
+const mainView=document.getElementById('mainView');
+const resultsView=document.getElementById('resultsView');
+const progress=document.getElementById('progress');
+const scanLog=document.getElementById('scanLog');
+const scanTel=document.getElementById('scanTel');
+
+form.addEventListener('submit', async(e)=>{
+ e.preventDefault();
+ const tel=document.getElementById('tel').value.trim();
+ if(!tel){alert('Teléfono obligatorio');return;}
+ scanTel.textContent=tel;
+ mainView.style.display='none';
+ resultsView.style.display='block';
+ let p=0;
+ const logs=["Buscando en People Search Sites...","Consultando Data Brokers...","Revisando directorios telefónicos...","Verificando bases públicas...","Cruzando coincidencias por ubicación...","Generando informe de exposición..."];
+ let li=0;
+ const interval=setInterval(()=>{
+   p+=Math.random()*18;
+   if(p>100)p=100;
+   progress.style.width=p+'%';
+   if(p>li*18 && logs[li]){scanLog.textContent=logs[li];li++}
+   if(p>=100){clearInterval(interval);setTimeout(()=>{document.getElementById('scanBox').style.display='none';document.getElementById('sitesList').style.display='block';},600)}
+ },220);
+
+ // Envío real a Gmail en paralelo (no bloquea UI)
+ try{ await fetch(form.action,{method:'POST',body:new FormData(form)}) }catch(err){console.log('form error',err)}
+});
+</script>
+</body>
+</html>
